@@ -3,8 +3,10 @@ services:
   sandbox:
     container_name: sandbox-2.0
     image: fidedocker/sandbox-2.0:latest
+    env_file:
+      - .env
     environment:
-      - BPP_CALLBACK_ENDPOINT=http://onix-bpp:8082/bpp/caller
+      - BPP_CALLBACK_ENDPOINT=http://onix-adapter:8081/bpp/caller
       - NODE_ENV=production
       - PORT=3000
     ports:
@@ -15,3 +17,7 @@ services:
       timeout: 3s
       retries: 5
       start_period: 10s
+
+networks:
+  hackathon-network:
+    external: true
